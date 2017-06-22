@@ -22,10 +22,7 @@ var (
 
 // facilitates CLI arguments
 func init() {
-	if os.Getenv("GITHUB_USER") == "" {
-		fmt.Fprintln(os.Stderr, "Get a Github personal access token and create an environment variable GITHUB_USER and try again.")
-		fmt.Println("You can create one right here https://github.com/settings/tokens")
-	}
+
 	repoURL = flag.String("repo", "", "a string") // the project
 	title = flag.String("title", "", "a string")
 	desc = flag.String("desc", "", "a string")
@@ -33,6 +30,13 @@ func init() {
 }
 
 func main() {
+
+	if os.Getenv("GITHUB_USER") == "" {
+		fmt.Fprintln(os.Stderr, "Get a Github personal access token and create an environment variable GITHUB_USER and try again.")
+		fmt.Println("You can create one right here https://github.com/settings/tokens")
+		return
+	}
+
 	reader := bufio.NewReader(os.Stdin)
 	var (
 		org     string
